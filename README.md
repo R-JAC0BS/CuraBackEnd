@@ -32,3 +32,4 @@
 ### POSTMAN (metodo GET) /HOME
 ![POSTMAN Home](img/img_4.png)
 ###### O método deve conter o token gerado inserido manualmente no POSTMAN em Authorization.
+"# CuraBackEnd" 
