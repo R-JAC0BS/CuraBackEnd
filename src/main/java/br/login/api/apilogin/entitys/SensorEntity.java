@@ -18,10 +18,8 @@ public class SensorEntity {
     @JsonBackReference
     private UsuarioEntity user;
 
-
     @Column(length = 100)
     private String emailVinculado;
-
 
     @Column(length = 100)
     private String nomePlaca;

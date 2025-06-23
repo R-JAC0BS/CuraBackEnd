@@ -29,9 +29,17 @@ public class RaspService {
 
         SensorEntity sensor = new SensorEntity();
         sensor.setUuid(novoUuid.getUuid());
+        sensor.setNomePlaca(novoUuid.toString());
         sensor.setUser(usuario);
         sensor.setEmailVinculado(usuario.getEmail());
 
         sensorRepository.save(sensor);
+    }
+
+    public void alterSensorName(String uuid, String name) throws Exception {
+        sensorRepository.findById(uuid).ifPresent(sensor -> {
+            sensor.setNomePlaca(name);
+            sensorRepository.save(sensor);
+        });
     }
 }

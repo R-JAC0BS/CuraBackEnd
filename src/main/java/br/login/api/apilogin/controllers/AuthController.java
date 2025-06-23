@@ -2,10 +2,10 @@ package br.login.api.apilogin.controllers;
 
 import br.login.api.apilogin.DTOS.SigninDTO;
 import br.login.api.apilogin.DTOS.SignupDTO;
+import br.login.api.apilogin.Utils.Adressutils;
 import br.login.api.apilogin.components.JWTutils;
 
 import br.login.api.apilogin.entitys.UsuarioEntity;
-import br.login.api.apilogin.services.EmailService;
 import br.login.api.apilogin.services.UsuarioService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +22,8 @@ public class AuthController {
     private final UsuarioService usuarioService;
     private final AuthenticationConfiguration auth;
     @Autowired
-    private EmailService emailService;
 
-    public AuthController(UsuarioService usuarioService, AuthenticationConfiguration auth, EmailService emailService) {
+    public AuthController(UsuarioService usuarioService, AuthenticationConfiguration auth) {
         this.usuarioService = usuarioService;
         this.auth = auth;
 
@@ -39,8 +38,6 @@ public class AuthController {
         System.out.println("Dados do novo usuário: " + novoUsuario);
 
         this.usuarioService.save(novoUsuario);
-        emailService.sendEmail(novoUsuario.getEmail(),"Confirmação","Email cadastrado");
-
         return ResponseEntity.status(HttpStatus.CREATED).body(novoUsuario);
     }
 

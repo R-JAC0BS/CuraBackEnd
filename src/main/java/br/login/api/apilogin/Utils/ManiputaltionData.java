@@ -10,9 +10,10 @@ import java.util.Optional;
 
 public class ManiputaltionData implements ConvertData {
 
+    static String qualidade;
 
 
-    public static DadosEntity ConvertionData(String data) throws JsonProcessingException,Exception {
+    public static DadosEntity ConvertionData(String data) throws Exception {
         try {
             String json = data.replace("'", "\"");
             ObjectMapper mapper = new ObjectMapper();
@@ -27,14 +28,19 @@ public class ManiputaltionData implements ConvertData {
             String ruido = map.get("ruido").toString();
             String qualidade_do_ar = map.get("qualidade_do_ar").toString();
 
-            return new DadosEntity(qualidade_do_ar,ruido,umidade,temperatura,luminosidade,uuid.toString());
+            int qualidadeAr = Integer.parseInt(qualidade_do_ar);
+
+
+            if (qualidadeAr < 200){
+                qualidade = "Excelente";
+            } else {
+                qualidade = "Ruim";
+            }
+
+            return new DadosEntity(qualidade,ruido,umidade,temperatura,luminosidade,uuid.toString());
         } catch (Exception e){
             return null;
         }
-
-
-
-
 
 
     }
